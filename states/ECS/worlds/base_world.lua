@@ -14,3 +14,4 @@ for k, v in pairs(Entities) do
     base_wordld:addEntity(v)
 end
 
+base_wordld:addEntity(require("states.ECS.entities.dialog"))
