@@ -100,6 +100,7 @@ State   = require 'libs.state'
 Signal  = require 'libs.signal'
 Inspect = require 'libs.inspect'
 Camera  = require 'libs.camera'
+Utils    = require 'libs.utils'
 StalkerCamera = require("threepartlibs.STALKER_X.Camera")
 Concord  = require 'threepartlibs.Concord.concord'
 require 'threepartlibs.loveAnimation.animation'
@@ -112,7 +113,7 @@ require 'states.ECS.components'
 require 'states.ECS.systems'
 require 'states.ECS.worlds'
 
-
+camera = StalkerCamera()
 
 States = {
     game = require 'states.game',

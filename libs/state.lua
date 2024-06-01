@@ -74,6 +74,16 @@ function GS.current()
     return stack[#stack]
 end
 
+GS.AOP = {
+    
+}
+function GS.setAopFun(func,callFuncName)
+    if type(func) == "function" then
+        GS.AOP[callFuncName] = func
+    end
+end
+
+
 -- fetch event callbacks from love.handlers
 local all_callbacks = { 'draw', 'errorhandler', 'update' }
 for k in pairs(love.handlers) do
@@ -86,6 +96,9 @@ function GS.registerEvents(callbacks)
     for _, f in ipairs(callbacks) do
         registry[f] = love[f] or __NULL__
         love[f] = function(...)
+            if GS.AOP[f] then 
+                GS.AOP[f](...)
+            end
             registry[f](...)
             return GS[f](...)
         end
