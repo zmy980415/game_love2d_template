@@ -8,8 +8,10 @@ function game:enter()
     camera = StalkerCamera()
     player = require("states.ECS.entities.player")
     player1 = require("states.ECS.entities.impl.player_1")
+    selectEntity = require("states.ECS.entities.select_entity")
     base_wordld:addEntity(player)
     base_wordld:addEntity(player1)
+    base_wordld:addEntity(selectEntity)
 end
 
 function game:update(dt)
@@ -36,6 +38,7 @@ function game:draw()
 
     camera:detach()
     camera:draw()
+    base_wordld:emit("drawNoinCarmera")
 end
 
 return game

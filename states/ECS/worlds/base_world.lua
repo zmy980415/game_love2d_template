@@ -4,9 +4,11 @@ base_wordld = Concord.world()
 
 print(move_system,draw_system)
 
-base_wordld:addSystems(move_system, draw_system)
+base_wordld:addSystems(move_system, draw_system,select_system)
 function base_wordld:onEntityAdded(entity)
-    print("add")
+    if entity['init'] then
+        entity['init']()
+    end
 end
 
 

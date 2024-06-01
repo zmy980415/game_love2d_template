@@ -11,3 +11,4 @@
 
 require 'states.ECS.systems.move_system'
 require 'states.ECS.systems.draw_system'
+require 'states.ECS.systems.select_system'
