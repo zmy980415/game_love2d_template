@@ -76,6 +76,3 @@ function select_system:draw()
     end
 end
     
-function select_system:drawNoinCarmera()
-
-end

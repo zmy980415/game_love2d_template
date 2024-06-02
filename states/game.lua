@@ -12,17 +12,17 @@ function game:enter()
     base_wordld:addEntity(player)
     base_wordld:addEntity(player1)
     base_wordld:addEntity(selectEntity)
+    dialog:add("enter game")
 end
 
 function game:update(dt)
     base_wordld:emit("update",dt)
-    -- print(#entities,entities.player)
     camera:follow(player.position.x,player.position.y)
     camera:update(dt)
 end
 
 function game:keypressed(key, code)
-
+    dialog:add(key)
 end
 
 function game:mousepressed(x, y, mbutton)

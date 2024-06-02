@@ -8,7 +8,27 @@ function draw_system:draw()
         if e.draw then
             e:draw()
         else
-           love.graphics.rectangle("fill", e.position.x, e.position.y, 111, 111)
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            -- TODO 这里的绘制会在最后需要去除掉
+            love.graphics.print("defaultDraw",e.position.x,e.position.y-20)
+            love.graphics.rectangle("fill", e.position.x, e.position.y, 100, 100)
+        end
+       
+    end
+end
+
+function draw_system:drawNoinCarmera()
+    for _, e in ipairs(self.pool) do
+        if e.drawNoinCarmera then
+            e:drawNoinCarmera()
         end
        
     end
