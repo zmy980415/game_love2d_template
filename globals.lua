@@ -85,7 +85,6 @@ Fonts = {
 -- 全局常量
 G = 200
 
-Entities= {}
 
 Fonts.default = Fonts.regular
 
@@ -109,9 +108,9 @@ Loader = require 'threepartlibs.love2dassetsloader.Loader.loader'
 Loader.init() -- Do not forget this!
 WF = require 'threepartlibs.windfield.windfield'
 -- ECS
-require 'states.ECS.components'
-require 'states.ECS.systems'
-require 'states.ECS.worlds'
+Concord.utils.loadNamespace('states/ECS/components')
+base_systems =  {}
+Concord.utils.loadNamespace('states/ECS/systems', base_systems)
 
 camera = StalkerCamera()
 

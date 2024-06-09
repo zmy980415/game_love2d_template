@@ -76,3 +76,4 @@ function select_system:draw()
     end
 end
     
+return select_system

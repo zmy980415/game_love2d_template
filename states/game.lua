@@ -1,7 +1,18 @@
 local game = {}
 
 function game:init()
-
+    -- 基础世界
+    base_wordld = Concord.world()
+    function base_wordld:onEntityAdded(entity)
+        if entity['init'] then
+            entity['init']()
+        end
+    end
+    dialog = require("states.ECS.entities.dialog")
+    base_wordld:addEntity(dialog)
+    for k, v in pairs(base_systems) do
+        base_wordld:addSystem(v)
+    end
 end
 
 function game:enter()

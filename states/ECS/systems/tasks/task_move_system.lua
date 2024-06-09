@@ -1,9 +1,9 @@
--- 移动系统
-move_system = Concord.system({
+-- 移动任务
+task_move_system = Concord.system({
     pool = {"position", "velocity"}
 })
 
-function move_system:update(dt)
+function task_move_system:update(dt)
     for _, e in ipairs(self.pool) do
         if e.move then
             e:move(dt)
@@ -13,5 +13,3 @@ function move_system:update(dt)
         end
     end
 end
-
-return move_system

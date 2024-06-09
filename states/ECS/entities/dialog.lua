@@ -12,7 +12,6 @@ dialog.pc = 0
 function dialog:add(message)
     dialog.pc = dialog.pc + 1
     self.stack[dialog.pc] = message
-    print(message,self.stack[dialog.pc])
 end
 
 -- 防止调用默认的绘制系统的draw方法

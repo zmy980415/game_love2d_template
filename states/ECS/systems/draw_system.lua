@@ -19,7 +19,7 @@ function draw_system:draw()
             -- TODO 这里的绘制会在最后需要去除掉
             -- TODO 这里的绘制会在最后需要去除掉
             love.graphics.print("defaultDraw",e.position.x,e.position.y-20)
-            love.graphics.rectangle("fill", e.position.x, e.position.y, 100, 100)
+            love.graphics.rectangle("fill", e.position.x, e.position.y, 20, 20)
         end
        
     end
@@ -33,3 +33,5 @@ function draw_system:drawNoinCarmera()
        
     end
 end
+
+return draw_system

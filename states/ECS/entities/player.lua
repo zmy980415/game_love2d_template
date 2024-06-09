@@ -1,11 +1,15 @@
 
+--[[
+    定义所有可选择的玩家类
+]]
+
+
 local prop= Concord.entity()
     :give("position", 50, 0)
     :give("velocity", 1, 1)
     :give("drawable")
     :give("isPlayer")
     :give("select")
-
 
 local player=Class.new(prop)
 
