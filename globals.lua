@@ -80,15 +80,20 @@ Fonts = {
     thinItalic      = makeFont 'assets/fonts/Roboto-Italic.ttf',
 
     monospace       = makeFont 'assets/fonts/RobotoMono-Regular.ttf',
+    cnm       = makeFont 'assets/fonts/cnm.sb.ttf',
+    ipix_12px       = makeFont 'assets/fonts/ipix_12px.ttf',
+    SIMFANG       = makeFont 'assets/fonts/SIMFANG.TTF',
+    SIMSUN       = makeFont 'assets/fonts/SIMSUN.TTC',
+    
 }
 
 -- 全局常量
 G = 200
 
 
-Fonts.default = Fonts.regular
+Fonts.default = Fonts.ipix_12px
 
-CONFIG.debug.stats.font = Fonts.monospace
+CONFIG.debug.stats.font = Fonts.ipix_12px  -- 设置游戏字体
 CONFIG.debug.error.font = Fonts.monospace
 
 Lume    = require 'libs.lume'

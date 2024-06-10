@@ -1,6 +1,7 @@
 local game = {}
 
 function game:init()
+    -- love.graphics.setFont(Fonts.ipix_12px)
     -- 基础世界
     base_wordld = Concord.world()
     function base_wordld:onEntityAdded(entity)
@@ -16,14 +17,16 @@ function game:init()
 end
 
 function game:enter()
+    
     camera = StalkerCamera()
     player = require("states.ECS.entities.player")
-    player1 = require("states.ECS.entities.impl.player_1")
     selectEntity = require("states.ECS.entities.select_entity")
+    resourceManagerEntity = require("states.ECS.entities.impl.rource_manager")
     base_wordld:addEntity(player)
-    base_wordld:addEntity(player1)
     base_wordld:addEntity(selectEntity)
-    dialog:add("enter game")
+    base_wordld:addEntity(resourceManagerEntity)
+    dialog:add("enter game, 你好")
+    
 end
 
 function game:update(dt)
@@ -33,11 +36,11 @@ function game:update(dt)
 end
 
 function game:keypressed(key, code)
-    dialog:add(key)
+    
 end
 
 function game:mousepressed(x, y, mbutton)
-
+    base_wordld:emit("mousepressed",x, y, mbutton)
 end
 
 function game:draw()
@@ -50,6 +53,7 @@ function game:draw()
     camera:detach()
     camera:draw()
     base_wordld:emit("drawNoinCarmera")
+
 end
 
 return game

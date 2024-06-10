@@ -38,7 +38,9 @@ function Utils.loadNamespace(pathOrFiles, namespace)
        local files = love.filesystem.getDirectoryItems(pathOrFiles)
        for _, file in ipairs(files) do
             local isFile = love.filesystem.getInfo(pathOrFiles .. "/" .. file).type == "file"
-
+            if not isFile then
+                Utils.loadNamespace(pathOrFiles .. "/" .. file, namespace)
+            end
             if isFile and string.match(file, '%.lua$') ~= nil then
                  local name = file:sub(1, #file - 4)
                  local path = pathOrFiles.."."..name

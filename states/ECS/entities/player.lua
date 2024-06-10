@@ -5,11 +5,12 @@
 
 
 local prop= Concord.entity()
-    :give("position", 50, 0)
-    :give("velocity", 1, 1)
+    :give("position", 50, 50)
+    :give("velocity", 100, 100)
     :give("drawable")
     :give("isPlayer")
     :give("select")
+    :give("target",50,50)
 
 local player=Class.new(prop)
 
