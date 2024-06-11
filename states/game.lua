@@ -6,7 +6,7 @@ function game:init()
     base_wordld = Concord.world()
     function base_wordld:onEntityAdded(entity)
         if entity['init'] then
-            entity['init']()
+            entity:init()
         end
     end
     dialog = require("states.ECS.entities.dialog")

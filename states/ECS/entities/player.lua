@@ -4,15 +4,13 @@
 ]]
 
 
-local prop= Concord.entity()
+local player= Concord.entity()
     :give("position", 50, 50)
     :give("velocity", 100, 100)
     :give("drawable")
     :give("isPlayer")
     :give("select")
     :give("target",50,50)
-
-local player=Class.new(prop)
 
 function player:move(dt)
     if self.select == true then

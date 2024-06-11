@@ -1,8 +1,6 @@
-local prop= Concord.entity()
+local reource= Concord.entity()
     :give("resource")
     :give("position")
-
-local reource=Class.new(prop)
 
 reource.value = 100 -- 资源储量
 
