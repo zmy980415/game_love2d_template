@@ -27,6 +27,7 @@ function task_move_system:mousepressed(x, y, mbutton)
         if mbutton == 2 then
             if e.select == true then
                 e.target.x, e.target.y = camera:getMousePosition()
+                dialog:add("移动到"..e.target.x..","..e.target.y)
             end
         end
     end

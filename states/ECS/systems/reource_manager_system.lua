@@ -1,12 +1,12 @@
 -- 移动系统
-move_system = Concord.system({
+reource_manager_system = Concord.system({
     pool = {"resource_manager"}
 })
 
-function move_system:update(dt)
+function reource_manager_system:update(dt)
     for _, e in ipairs(self.pool) do
         e:update(dt)
     end
 end
 
-return move_system
+return reource_manager_system

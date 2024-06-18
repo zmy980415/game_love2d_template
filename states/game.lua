@@ -1,7 +1,6 @@
 local game = {}
 
 function game:init()
-    -- love.graphics.setFont(Fonts.ipix_12px)
     -- 基础世界
     base_wordld = Concord.world()
     function base_wordld:onEntityAdded(entity)

@@ -12,6 +12,16 @@ return {
             return true
         end
         return false
+    end,
+    inCircle = function(x,y,circle)
+        if circle.r < 0 then
+            circle.x = circle.x + circle.r
+            circle.r = -circle.r
+        end
+        if (x - circle.x) * (x - circle.x) + (y - circle.y) * (y - circle.y) <= circle.r * circle.r then
+            return true
+        end
+        return false
     end
     
 }

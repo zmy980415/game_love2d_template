@@ -5,6 +5,7 @@ move_system = Concord.system({
 
 function move_system:update(dt)
     for _, e in ipairs(self.pool) do
+        e:update(dt)
         if e.move then
             e:move(dt)
         else

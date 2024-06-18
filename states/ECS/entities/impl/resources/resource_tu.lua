@@ -16,7 +16,12 @@ function resource_tu:draw()
     love.graphics.rectangle("fill", self.position.x, self.position.y, self.rect.width, self.rect.height)
 end
 function resource_tu:newInstance()
-    return Class.clone(resource_tu)
+    local c = Class.clone(resource_tu)
+    c.position.x = math.random(-100,1000)
+    c.position.y = math.random(-100,1000)
+    c.rect.width = math.random(10,20)
+    c.rect.height = math.random(10,20)
+    return c
 end
 return resource_tu 
 

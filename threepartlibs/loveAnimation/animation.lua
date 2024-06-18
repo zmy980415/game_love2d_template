@@ -103,14 +103,20 @@ end
 
 function LoveAnimation:init(filepath, imagePath)
 	local desc = nil
-	if __loadedDescriptors[filepath] then
-		desc = __loadedDescriptors[filepath]
+	if type( filepath ) == 'table' then
+		desc = filepath
 	else
-		local chunk = love.filesystem.load(filepath)
-		desc = chunk()
-		check_descriptor_integrity(desc);
-		__loadedDescriptors[filepath] = desc;
+		if __loadedDescriptors[filepath] then
+			desc = __loadedDescriptors[filepath]
+		else
+			local chunk = love.filesystem.load(filepath)
+			desc = chunk()
+			check_descriptor_integrity(desc);
+			__loadedDescriptors[filepath] = desc;
+		end
 	end
+	
+	
 
 	self.filepath = filepath
 	self.descriptor = desc

@@ -21,8 +21,8 @@ function resource_shui:newInstance()
     local c = Class.clone(resource_shui)
     c.position.x = math.random(-100,1000)
     c.position.y = math.random(-100,1000)
-    c.rect.width = math.random(10,1000)
-    c.rect.height = math.random(10,1000)
+    c.rect.width = math.random(10,20)
+    c.rect.height = math.random(10,20)
     return c
 end
 
