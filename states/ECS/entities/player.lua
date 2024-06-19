@@ -54,9 +54,12 @@ local player= Concord.entity()
     player.animation = LoveAnimation.new(animation)
     player.animation:setSpeedMultiplier(1)
     local anim_rect=player.animation:getGeometry()
+    player.animation:setRelativeOrigin(0.5,0.5)
 
 function player:update(dt)
     self.animation:update(dt)
+    local state = self.animation:getCurrentState()
+    if state == "running" and math.abs(self.position.x -  self.target.x) < 0.1 and math.abs(self.position.y -  self.target.y) < 0.1 then
         self.animation:setState('work')
         self.position.x = self.target.x
         self.position.y = self.target.y
@@ -64,6 +67,7 @@ function player:update(dt)
     if state == "work" and (math.abs(self.position.x -  self.target.x) > 0.1 or math.abs(self.position.y -  self.target.y) > 0.1 ) then
         self.animation:setState('running') 
     end
+    state = self.animation:getCurrentState()
     
     if state == "work" then
         local list = base_wordld:query({"resource"})
