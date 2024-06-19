@@ -30,17 +30,24 @@ function resourceManagerEntity:init()
             print("load resource: " .. name,value)
         end
     end
-    
+    for i = 1, 10, 1 do
+        local resource_name = "resource_shui"
+        base_wordld:addEntity(self.resources[resource_name]().prop)
+    end
+    for i = 1, 10, 1 do
+        local resource_name = "resource_tu"
+        base_wordld:addEntity(self.resources[resource_name]().prop)
+    end
 end
 
 function resourceManagerEntity:update(dt)
-    if self.current_count < self.max_count then
-        -- 创建一个资源
-        -- 添加到资源管理器
-        local resource_name = "resource_shui"
-        base_wordld:addEntity(self.resources[resource_name]:newInstance())
-        self.current_count = self.current_count + 1
-    end
+    -- if self.current_count < self.max_count then
+    --     -- 创建一个资源
+    --     -- 添加到资源管理器
+    --     local resource_name = "resource_shui"
+    --     base_wordld:addEntity(self.resources[resource_name]().prop)
+    --     self.current_count = self.current_count + 1
+    -- end
 end
 
 function resourceManagerEntity:newEntity(name)

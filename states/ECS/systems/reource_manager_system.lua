@@ -8,5 +8,10 @@ function reource_manager_system:update(dt)
         e:update(dt)
     end
 end
+function reource_manager_system:draw()
+    for _, e in ipairs(self.pool) do
+        -- e.parent():draw()
+    end
+end
 
 return reource_manager_system

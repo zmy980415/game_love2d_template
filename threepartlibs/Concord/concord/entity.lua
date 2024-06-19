@@ -12,9 +12,9 @@ local Utils      = require(PATH..".utils")
 local Builtins   = require(PATH..".builtins.init") --luacheck: ignore
 -- Builtins is unused but the require already registers the Components
 
-local Entity = {
-   SERIALIZE_BY_DEFAULT = true,
-}
+local Entity = Classic:extend()
+Entity.SERIALIZE_BY_DEFAULT = true
+
 
 Entity.__mt = {
    __index = Entity,

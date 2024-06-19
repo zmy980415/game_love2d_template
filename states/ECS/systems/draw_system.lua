@@ -5,7 +5,12 @@ draw_system = Concord.system({
 
 function draw_system:draw()
     for _, e in ipairs(self.pool) do
-        if e.draw then
+        if e.parent ~= nil then
+            -- print(type( e.parent().draw))
+        end
+        if e.parent ~= nil and e.parent().draw ~= nil then
+            e.parent():draw()
+        elseif e.draw then
             e:draw()
         else
             -- TODO 这里的绘制会在最后需要去除掉

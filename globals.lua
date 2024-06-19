@@ -99,6 +99,7 @@ CONFIG.debug.error.font = Fonts.monospace
 Lume    = require 'libs.lume'
 Husl    = require 'libs.husl'
 Class   = require 'libs.class'
+Classic = require 'threepartlibs.classic.classic'
 Vector  = require 'libs.vector'
 State   = require 'libs.state'
 Signal  = require 'libs.signal'

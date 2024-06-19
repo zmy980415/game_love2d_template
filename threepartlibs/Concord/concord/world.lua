@@ -118,7 +118,6 @@ function World:removeEntity(e)
    if not Type.isEntity(e) then
       Utils.error(2, "bad argument #1 to 'World:removeEntity' (Entity expected, got %s)", type(e))
    end
-
    if e.__world ~= self then
       error("trying to remove an Entity from a World it doesn't belong to", 2)
    end

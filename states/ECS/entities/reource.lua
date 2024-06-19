@@ -1,14 +1,15 @@
-local reource= Concord.entity()
-    :give("resource")
-    :give("position")
 
-reource.value = 100 -- 资源储量
-reource.curValue = reource.value
 
+local reource = Classic:extend()
+
+
+function reource:new()
+    self.value = 100 -- 资源储量
+    self.curValue = self.value
+end
 
 function reource:init(maxV) 
     self.curValue , self.value = maxV , maxV
-    
 end
 
 function reource:getValue()
@@ -20,13 +21,14 @@ function reource:setValue(v)
 end
 
 -- 开发资源
-function reource:develop()
-    reource.curValue = reource.curValue - 1
-    if(reource.curValue <= 0) then
-        base_wordld:removeEntity(self)
+function reource:develop(v)
+    v = v or 0.1
+    self.curValue = self.curValue - v
+    if(self.curValue <= 0) then
+        base_wordld:removeEntity(self.prop)
         dialog:add("资源耗尽")
     end
-   return reource.curValue
+   return self.curValue
 end
 
 
