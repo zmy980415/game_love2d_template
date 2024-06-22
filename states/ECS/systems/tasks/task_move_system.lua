@@ -1,42 +1,43 @@
 -- 移动任务
-task_move_system = Concord.system({
-    pool = {"position", "velocity","select","target"}
-})
+local coms = ECS.component_table
+local task_move_system =  ECS.System("process", 1, ECS.Query.All({coms.position, coms.velocity, coms.select, coms.target}))
+function task_move_system:update(Time)
 
-function task_move_system:update(dt)
-    
-    for _, e in ipairs(self.pool) do
-        if e.position.x < e.target.x then
-            e.position.x = e.position.x + e.velocity.x * dt
+    local dt = Time.DeltaFixed
+    for i, entity in self:Result():Iterator() do
+        local position = entity[coms.position]
+        local target = entity[coms.target]
+        local velocity = entity[coms.velocity]
+        if position.x < target.x then
+            position.x = position.x + velocity.x * dt
         end
-        if e.position.x > e.target.x then
-            e.position.x = e.position.x - e.velocity.x * dt
+        if position.x > target.x then
+            position.x = position.x - velocity.x * dt
         end
-        if e.position.y < e.target.y then
-            e.position.y = e.position.y + e.velocity.y * dt
+        if position.y < target.y then
+            position.y = position.y + velocity.y * dt
         end
-        if e.position.y > e.target.y then
-            e.position.y = e.position.y - e.velocity.y * dt
+        if position.y > target.y then
+            position.y = position.y - velocity.y * dt
         end
-        
     end
 end
 
+
 function task_move_system:mousepressed(x, y, mbutton)
-    for _, e in ipairs(self.pool) do
+    for i, entity in self:Result():Iterator() do
         if mbutton == 2 then
             if e.select == true then
                 e.target.x, e.target.y = camera:getMousePosition()
-                dialog:add("移动到"..e.target.x..","..e.target.y)
+                dialog:add("移动到" .. e.target.x .. "," .. e.target.y)
             end
         end
     end
-    
+
 end
 
 function task_move_system:mousereleased(x, y, mbutton)
 
 end
-
 
 return task_move_system

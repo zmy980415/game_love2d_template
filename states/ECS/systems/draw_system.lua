@@ -1,14 +1,16 @@
 -- 绘制系统
-draw_system = Concord.system({
-    pool = {"position", "drawable","drawOrder"}
-})
+-- draw_system = Concord.system({
+--     pool = {"position", "drawable","drawOrder"}
+-- })
+local coms = ECS.component_table
+local draw_system =  ECS.System("process", 1, ECS.Query.All({coms.position, coms.drawable, coms.drawOrder}))
+
+function draw_system:Update(Time)
+    print("=")
+end
 
 function draw_system:draw()
-    local t = table.clone( self.pool )
-    -- print(t)
-    -- table.sort(t, function(a, b) return a.drawOrder.v < b.drawOrder.v end)
-
-    for _, e in ipairs(t) do
+    for i, e in self:Result():Iterator() do
         if e.parent ~= nil and e.parent().draw ~= nil then
             e.parent():draw()
         elseif e.draw then

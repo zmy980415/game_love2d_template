@@ -1,7 +1,6 @@
 -- 绘制系统
-select_system = Concord.system({
-    pool = {"position", "drawable","select"}
-})
+local coms = ECS.component_table
+local select_system =  ECS.System("process", 1, ECS.Query.All({coms.position, coms.drawable, coms.select}))
 isDown = false
 select_rect = {
     x = 0,
@@ -34,13 +33,13 @@ end
 
 function select_system:update()
     if love.keyboard.isDown("escape") then
-        for _, e in ipairs(self.pool) do
+        for i, e in self:Result():Iterator() do
             e.select = false
         end
     end
     if isDown == true then
         select_rect.x2, select_rect.y2 = camera:getMousePosition()
-        for _, e in ipairs(self.pool) do
+        for i, e in self:Result():Iterator() do
             if Utils.inRect(e.position.x,e.position.y,{
                 x = select_rect.x,
                 y = select_rect.y,
@@ -62,7 +61,7 @@ function select_system:draw()
         love.graphics.rectangle("line", select_rect.x, select_rect.y, select_rect.x2-select_rect.x, select_rect.y2-select_rect.y)
         
     end
-    for _, e in ipairs(self.pool) do
+    for i, e in self:Result():Iterator() do
         if e.select == true then
             love.graphics.setColor(1,0,0,1)
             love.graphics.circle("line", e.position.x, e.position.y, 20)

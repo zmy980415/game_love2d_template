@@ -1,1 +1,0 @@
-Concord.component("resource_manager")

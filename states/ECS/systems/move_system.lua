@@ -1,10 +1,9 @@
 -- 移动系统
-move_system = Concord.system({
-    pool = {"position", "velocity"}
-})
-
-function move_system:update(dt)
-    for _, e in ipairs(self.pool) do
+local coms = ECS.component_table
+local move_system =  ECS.System("process", 1, ECS.Query.All({coms.position, coms.velocity}))
+function move_system:update(Time)
+    local dt = Time.DeltaFixed
+    for i, e in self:Result():Iterator() do
         e:update(dt)
         if e.move then
             e:move(dt)

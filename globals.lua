@@ -110,16 +110,49 @@ StalkerCamera = require("threepartlibs.STALKER_X.Camera")
 Concord  = require 'threepartlibs.Concord.concord'
 require 'threepartlibs.loveAnimation.animation'
 Timer   = require 'libs.timer'
+ECS = require 'threepartlibs.ECS'
+-- Component, System, Query = ECS.Component, ECS.System, ECS.Query 
+
 Loader = require 'threepartlibs.love2dassetsloader.Loader.loader'
 Loader.init() -- Do not forget this!
 WF = require 'threepartlibs.windfield.windfield'
 -- ECS
-Concord.utils.loadNamespace('states/ECS/components')
-base_systems =  {}
-Concord.utils.loadNamespace('states/ECS/systems', base_systems)
+-- Concord.utils.loadNamespace('states/ECS/components')
+-- base_systems =  {}
+-- Concord.utils.loadNamespace('states/ECS/systems', base_systems)
 
 camera = StalkerCamera()
 
 States = {
     game = require 'states.game',
 }
+
+ECS.component_table = {}
+function ECS_load_to_table(resourcePath,namespace)
+    local t = {}
+    print("init rource manager"..resourcePath)
+    -- 加载所有资源文件夹下的实体类
+    local info = love.filesystem.getInfo(resourcePath) -- luacheck: ignore
+    if info == nil or info.type ~= "directory" then
+        print("bad resource directory (path '%s' not found)", resourcePath)
+    end
+
+    local files = love.filesystem.getDirectoryItems(resourcePath)
+    for _, file in ipairs(files) do
+        local isFile = love.filesystem.getInfo(resourcePath .. "/" .. file).type == "file"
+        if not isFile then
+            ECS_load_to_table(resourcePath .. "/" .. file, namespace)
+        end
+        if isFile and string.match(file, '%.lua$') ~= nil then
+            local name = file:sub(1, #file - 4)
+            local path = resourcePath .. "." .. name
+            local p, s = path:gsub("%/", ".")
+            t[name] = require(p)
+            print(p,s)
+            print("load component: " .. name,value)
+        end
+    end
+    return t
+end
+ECS.component_table = ECS_load_to_table("states/ECS/components")
+ECS.system_table = ECS_load_to_table("states/ECS/systems")
