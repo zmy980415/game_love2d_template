@@ -26,6 +26,7 @@ function reource:develop(v)
     self.curValue = self.curValue - v
     if(self.curValue <= 0) then
         base_wordld:removeEntity(self.prop)
+        self.prop:destroy()
         dialog:add("资源耗尽")
     end
    return self.curValue

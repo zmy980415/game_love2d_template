@@ -49,6 +49,7 @@ local player= Concord.entity()
     :give("isPlayer")
     :give("select")
     :give("target",50,50)
+    :give("drawOrder",999)
 
     player.useSize = 100
     player.animation = LoveAnimation.new(animation)
@@ -59,14 +60,18 @@ local player= Concord.entity()
 function player:update(dt)
     self.animation:update(dt)
     local state = self.animation:getCurrentState()
-    if state == "running" and math.abs(self.position.x -  self.target.x) < 0.1 and math.abs(self.position.y -  self.target.y) < 0.1 then
+    local judgeSize = 0.5
+    if state == "running" and math.abs(self.position.x -  self.target.x) < judgeSize and math.abs(self.position.y -  self.target.y) < judgeSize then
         self.animation:setState('work')
         self.position.x = self.target.x
         self.position.y = self.target.y
+        dialog:add("You are now working!")
     end
-    if state == "work" and (math.abs(self.position.x -  self.target.x) > 0.1 or math.abs(self.position.y -  self.target.y) > 0.1 ) then
+    if state == "work" and (math.abs(self.position.x -  self.target.x) > judgeSize or math.abs(self.position.y -  self.target.y) > judgeSize ) then
         self.animation:setState('running') 
+        dialog:add("You are now running!")
     end
+
     state = self.animation:getCurrentState()
     
     if state == "work" then
@@ -109,7 +114,7 @@ end
 
 function player:draw()
     love.graphics.setColor(1,1,1,1)
-    love.graphics.rectangle("fill", self.position.x, self.position.y, 20, 20)
+    -- love.graphics.rectangle("fill", self.position.x, self.position.y, 20, 20)
     love.graphics.circle("line",self.position.x,self.position.y,self.useSize)
     
     local rect = self.animation:getGeometry()
@@ -123,7 +128,9 @@ function player:draw()
     end
     
     self.animation:draw()
-    -- love.graphics.rectangle("line",rect.x,rect.y,rect.width,rect.height)
+    if self.position.x ~= self.target.x or self.position.y ~= self.target.y then
+        love.graphics.line(self.position.x,self.position.y,self.target.x,self.target.y)
+    end
 end
 
 return player

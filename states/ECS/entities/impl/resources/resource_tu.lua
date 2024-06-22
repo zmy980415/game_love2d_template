@@ -11,6 +11,7 @@ function resource_tu:new()
     :give("resource")
     :give("position")
     :give("drawable")
+    :give("drawOrder",1)
     prop.parent = function()
         return self
     end

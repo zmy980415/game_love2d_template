@@ -3,6 +3,7 @@
 local prop= Concord.entity()
     :give("position", 0, love.graphics.getHeight() - 80)
     :give("drawable")
+    :give("drawOrder",1000)
 
 local dialog = Class.new(prop) 
 

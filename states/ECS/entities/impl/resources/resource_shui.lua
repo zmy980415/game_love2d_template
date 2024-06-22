@@ -11,6 +11,7 @@ function resource_shui:new()
     :give("resource")
     :give("position")
     :give("drawable")
+    :give("drawOrder",2)
     prop.parent = function()
         return self
     end

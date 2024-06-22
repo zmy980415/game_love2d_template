@@ -1,13 +1,14 @@
 -- 绘制系统
 draw_system = Concord.system({
-    pool = {"position", "drawable"}
+    pool = {"position", "drawable","drawOrder"}
 })
 
 function draw_system:draw()
-    for _, e in ipairs(self.pool) do
-        if e.parent ~= nil then
-            -- print(type( e.parent().draw))
-        end
+    local t = table.clone( self.pool )
+    -- print(t)
+    -- table.sort(t, function(a, b) return a.drawOrder.v < b.drawOrder.v end)
+
+    for _, e in ipairs(t) do
         if e.parent ~= nil and e.parent().draw ~= nil then
             e.parent():draw()
         elseif e.draw then
