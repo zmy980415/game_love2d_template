@@ -37,7 +37,15 @@ local animation = {
 			frameH = 64,
 			nextState = "work",
 			switchDelay = 0.1
-		}
+		},
+        work_build = {
+			frameCount = 4,
+			offsetY = 0,
+			frameW = 48,
+			frameH = 64,
+			nextState = "work_build",
+			switchDelay = 0.1
+		},
 	}
 }
 
@@ -56,7 +64,7 @@ local player= Concord.entity()
     player.animation:setSpeedMultiplier(1)
     local anim_rect=player.animation:getGeometry()
     player.animation:setRelativeOrigin(0.5,0.5)
-
+    player.resources = {}
 function player:update(dt)
     self.animation:update(dt)
     local state = self.animation:getCurrentState()
@@ -83,7 +91,12 @@ function player:update(dt)
             end
         end
         for k,e in ipairs(t) do
-            e.parent():develop(0.1 / #t)
+            local size = 0.1 / #t
+            local v,name = e.parent():develop(size)
+            if(self.resources[name] == nil) then
+                self.resources[name] = 0
+            end
+            self.resources[name] = self.resources[name] + size
         end
         -- base_wordld:query({"resource"}, function(e)
         --     if Utils.inCircle(self.position.x,self.position.y,{x = e.position.x,y=e.position.y,r=self.useSize}) then
@@ -113,6 +126,11 @@ function player:move(dt)
 end
 
 function player:draw()
+    love.graphics.setColor(0.2,1,0.6,0.5)
+    local tipsWidth = 150
+    love.graphics.rectangle("fill",self.position.x - tipsWidth / 2,self.position.y - 64,tipsWidth,20)
+    love.graphics.setColor(0.8,1,0.2,1)
+    love.graphics.print("状态-"..self.animation:getCurrentState(),self.position.x - tipsWidth / 2,self.position.y - 64)
     love.graphics.setColor(1,1,1,1)
     -- love.graphics.rectangle("fill", self.position.x, self.position.y, 20, 20)
     love.graphics.circle("line",self.position.x,self.position.y,self.useSize)

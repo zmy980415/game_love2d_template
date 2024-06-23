@@ -6,6 +6,7 @@ local resource_shui = resource:extend() --Class.clone(resource)
 
 function resource_shui:new()
     self.super:new()
+    self:init(math.random(100,2000))
     self.name = "resource_shui"
     local prop= Concord.entity()
     :give("resource")
@@ -21,8 +22,8 @@ function resource_shui:new()
     -- local c = Class.clone(resource_shui)
     self.prop.position.x = math.random(-100,1000)
     self.prop.position.y = math.random(-100,1000)
-    self.rect.width = math.random(10,20)
-    self.rect.height = math.random(10,20)
+    self.rect.width = math.sqrt(self.curValue) 
+    self.rect.height = math.sqrt(self.curValue)
 end
 function resource_shui:printPairs()
     for k, v in pairs(self) do
@@ -32,9 +33,19 @@ end
 
 
 function resource_shui:draw()
+    local x2, y2 = camera:getMousePosition()
     love.graphics.setColor(0,0,1,1)
+    self.rect.width = math.sqrt(self.curValue) 
+    self.rect.height = math.sqrt(self.curValue)
     love.graphics.rectangle("fill", self.prop.position.x, self.prop.position.y, self.rect.width, self.rect.height)
-    love.graphics.print('=='..self.curValue..'/'..self.value, self.prop.position.x, self.prop.position.y)
+    
+    if Utils.inRect(x2,y2,{x = self.prop.position.x, y = self.prop.position.y, w = self.rect.width, h = self.rect.height}) then
+        love.graphics.setColor(1,0.5,1,1)
+        love.graphics.rectangle("line", self.prop.position.x, self.prop.position.y, self.rect.width, self.rect.height)
+        self.drawInfo(self)
+    end
+    love.graphics.setColor(1,1,1,1)
+    love.graphics.print('=='..math.floor(self.curValue)..'/'..self.value, self.prop.position.x, self.prop.position.y)
 end
 
 

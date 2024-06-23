@@ -38,7 +38,7 @@ function select_system:update()
             e.select = false
         end
     end
-    if isDown == true then
+    if isDown == true and love.keyboard.isDown('lctrl') then
         select_rect.x2, select_rect.y2 = camera:getMousePosition()
         for _, e in ipairs(self.pool) do
             if Utils.inRect(e.position.x,e.position.y,{
@@ -57,7 +57,7 @@ function select_system:update()
 end
     
 function select_system:draw()
-    if isDown then
+    if isDown and love.keyboard.isDown('lctrl') then
         love.graphics.setColor(0,1,0,1)
         love.graphics.rectangle("line", select_rect.x, select_rect.y, select_rect.x2-select_rect.x, select_rect.y2-select_rect.y)
         

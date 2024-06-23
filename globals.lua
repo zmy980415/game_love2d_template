@@ -2,7 +2,7 @@
 -- !! This flag controls the ability to toggle the debug view.         !!
 -- !! You will want to turn this to 'true' when you publish your game. !!
 -- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-RELEASE = false
+RELEASE = true
 
 -- Enables the debug stats
 DEBUG = not RELEASE
@@ -93,7 +93,7 @@ G = 200
 
 Fonts.default = Fonts.ipix_12px
 
-CONFIG.debug.stats.font = Fonts.ipix_12px  -- 设置游戏字体
+CONFIG.debug.stats.font = Fonts.SIMFANG  -- 设置游戏字体
 CONFIG.debug.error.font = Fonts.monospace
 
 Lume    = require 'libs.lume'
